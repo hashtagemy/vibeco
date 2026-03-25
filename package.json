@@ -1,0 +1,196 @@
+{
+  "name": "vibeco",
+  "displayName": "Vibeco - Code Explainer for Vibe Coders",
+  "description": "Select code and get beginner-friendly explanations. Supports Anthropic Claude, OpenAI, Google Gemini, Ollama, and AWS Bedrock.",
+  "version": "0.1.21",
+  "publisher": "Vibeco-emy",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Education",
+    "Other"
+  ],
+  "keywords": [
+    "code explanation",
+    "AI",
+    "Claude",
+    "OpenAI",
+    "Gemini",
+    "Ollama",
+    "beginner",
+    "vibe coding",
+    "learn to code"
+  ],
+  "icon": "media/icon.png",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "vibeco-panel",
+          "title": "Vibeco",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "vibeco-panel": [
+        {
+          "type": "webview",
+          "id": "vibeco.explanationView",
+          "name": "Code Explanation"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "vibeco.explainSelection",
+        "title": "Vibeco: Explain Selected Code"
+      },
+      {
+        "command": "vibeco.openSettings",
+        "title": "Vibeco: Change Provider Settings"
+      }
+    ],
+    "configuration": [
+      {
+        "title": "Provider",
+        "order": 1,
+        "properties": {
+          "vibeco.provider": {
+            "type": "string",
+            "default": "",
+            "enum": [
+              "",
+              "anthropic",
+              "openai",
+              "ollama",
+              "bedrock",
+              "gemini"
+            ],
+            "enumDescriptions": [
+              "Not configured",
+              "Anthropic Claude",
+              "OpenAI GPT",
+              "Ollama (local)",
+              "AWS Bedrock",
+              "Google Gemini"
+            ],
+            "description": "LLM provider for code explanations",
+            "order": 1
+          },
+          "vibeco.model": {
+            "type": "string",
+            "default": "",
+            "description": "Model name override (e.g., claude-sonnet-4-20250514, gpt-4o, gemini-2.0-flash, llama3)",
+            "order": 2
+          }
+        }
+      },
+      {
+        "title": "API Key",
+        "order": 2,
+        "properties": {
+          "vibeco.apiKey": {
+            "type": "string",
+            "default": "",
+            "description": "API key for Anthropic, OpenAI, or Google Gemini"
+          }
+        }
+      },
+      {
+        "title": "AWS Bedrock",
+        "order": 3,
+        "properties": {
+          "vibeco.awsAccessKeyId": {
+            "type": "string",
+            "default": "",
+            "description": "AWS Access Key ID",
+            "order": 1
+          },
+          "vibeco.awsSecretAccessKey": {
+            "type": "string",
+            "default": "",
+            "description": "AWS Secret Access Key",
+            "order": 2
+          },
+          "vibeco.awsRegion": {
+            "type": "string",
+            "default": "us-east-1",
+            "description": "AWS Region (e.g., us-east-1, eu-west-1)",
+            "order": 3
+          }
+        }
+      },
+      {
+        "title": "Ollama",
+        "order": 4,
+        "properties": {
+          "vibeco.ollamaUrl": {
+            "type": "string",
+            "default": "http://localhost:11434",
+            "description": "Ollama server URL for local models"
+          }
+        }
+      },
+      {
+        "title": "General",
+        "order": 5,
+        "properties": {
+          "vibeco.language": {
+            "type": "string",
+            "default": "en",
+            "enum": [
+              "en",
+              "tr"
+            ],
+            "enumDescriptions": [
+              "English",
+              "Turkce"
+            ],
+            "description": "Language for code explanations",
+            "order": 1
+          },
+          "vibeco.explainOnFileOpen": {
+            "type": "boolean",
+            "default": true,
+            "description": "Automatically explain a file's role when you open it",
+            "order": 2
+          },
+          "vibeco.debounceMs": {
+            "type": "number",
+            "default": 800,
+            "minimum": 200,
+            "maximum": 5000,
+            "description": "Delay in milliseconds before sending code for explanation",
+            "order": 3
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --sourcemap",
+    "watch": "npm run build -- --watch",
+    "compile": "tsc -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "esbuild": "^0.20.0",
+    "typescript": "^5.3.0",
+    "@vscode/vsce": "^2.22.0"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "openai": "^4.73.0",
+    "@aws-sdk/client-bedrock-runtime": "^3.700.0"
+  }
+}
