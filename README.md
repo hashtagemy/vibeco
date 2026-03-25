@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="media/icon.png" alt="VibeCo Logo" width="128">
+  <img src="vibeco.svg" alt="VibeCo Logo" width="128">
 </p>
 
 # Vibeco - Code Explainer for Vibe Coders
