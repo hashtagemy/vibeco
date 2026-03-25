@@ -6,7 +6,12 @@
 
 **Select code. Understand it. Learn while you build.**
 
-Vibeco helps vibe coders understand the code they work with. Select any code and get beginner-friendly explanations in the sidebar.
+Vibeco is a VS Code and Kiro extension that helps vibe coders understand the code they work with. Select any code and get beginner-friendly explanations in the sidebar.
+
+## Install
+
+- **VS Code** — [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Vibeco-emy.vibeco)
+- **Kiro** — [Open VSX Registry](https://open-vsx.org/extension/Vibeco-emy/vibeco)
 
 ## Features
 
