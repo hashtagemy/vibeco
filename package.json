@@ -5,6 +5,10 @@
   "version": "0.1.21",
   "publisher": "Vibeco-emy",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hashtagemy/vibeco"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
